@@ -13,17 +13,22 @@
 
 Board = Class{}
 
-function Board:init(x, y)
+function Board:init(x, y, level)
+    print('init board with level: '.. tostring(level))
     self.x = x
     self.y = y
     self.matches = {}
-    self.level = 1
+    self.level = level
     self:initializeTiles()
+end
+
+function Board:increaseLevel()
+    self.level = self.level + 1
 end
 
 function Board:initializeTiles()
     self.tiles = {}
-
+    print('initializing tiles' .. self.level)
     for tileY = 1, 8 do
         
         -- empty table that will serve as a new row

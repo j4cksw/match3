@@ -59,7 +59,7 @@ function PlayState:enter(params)
     self.level = params.level
 
     -- spawn a board and place it toward the right
-    self.board = params.board or Board(VIRTUAL_WIDTH - 272, 16)
+    self.board = params.board or Board(VIRTUAL_WIDTH - 272, 16, self.level)
 
     -- grab score from params if it was passed
     self.score = params.score or 0
@@ -193,7 +193,7 @@ function PlayState:calculateMatches()
             self.score = self.score + #match * 50
             
             -- increase timer when earn the score
-            self.time = self.timer + 1
+            self.timer = self.timer + 10
         end
 
         -- remove any tiles that matched from the board, making empty spaces
