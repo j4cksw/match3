@@ -19,7 +19,7 @@ function Board:init(x, y, level)
     self.y = y
     self.matches = {}
     self.level = level
-    self.shinyRate = 0.3
+    self.shinyRate = 0.2
     self:initializeTiles()
 end
 
@@ -170,6 +170,12 @@ end
 function Board:removeMatches()
     for k, match in pairs(self.matches) do
         for k, tile in pairs(match) do
+            -- Remove entire row if the tile is shiny
+            if tile.isShiny then
+                for col = 1, 8 do
+                    self.tiles[tile.gridY][col] = nil
+                end
+            end
             self.tiles[tile.gridY][tile.gridX] = nil
         end
     end

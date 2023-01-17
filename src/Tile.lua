@@ -46,10 +46,6 @@ function Tile:render(x, y)
         self.x + x + 2, self.y + y + 2)
 
     -- draw tile itself
-    -- if self.isShiny then
-    --     love.graphics.setColor(255/255, 0, 0, 1)
-    -- else
-    
     if self.isShiny then
         love.graphics.setColor(255/255, 255/255, 255/255, 1)
         effect(function ()
