@@ -29,6 +29,7 @@
 
 -- this time, we're keeping all requires and assets in our Dependencies.lua file
 require 'src/Dependencies'
+local moonshine = require 'lib.moonshine'
 
 -- physical screen dimensions
 WINDOW_WIDTH = 1280
@@ -74,6 +75,8 @@ function love.load()
 
     -- initialize input table
     love.keyboard.keysPressed = {}
+
+    effect = moonshine(moonshine.effects.glow)
 end
 
 function love.resize(w, h)
