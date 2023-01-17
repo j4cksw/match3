@@ -30,6 +30,7 @@
 -- this time, we're keeping all requires and assets in our Dependencies.lua file
 require 'src/Dependencies'
 local moonshine = require 'lib.moonshine'
+local lovetest = require "lib.test.lovetest"
 
 -- physical screen dimensions
 WINDOW_WIDTH = 1280
@@ -40,6 +41,14 @@ VIRTUAL_WIDTH = 512
 VIRTUAL_HEIGHT = 288
 
 function love.load()
+
+    -- Check for the testing command line flags
+    if lovetest.detect(arg) then
+        -- Run the tests
+        lovetest.run()
+        --return
+    end
+
     -- initialize our nearest-neighbor filter
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
