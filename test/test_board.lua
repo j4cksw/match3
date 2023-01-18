@@ -1,7 +1,4 @@
-function test_addition() 
-    assert_equal(2 + 2, 4)
-  end
-  
-  function test_subtraction()
-    assert_equal(2 - 2, 0)
-  end
+function test_checkMatchesAvailable() 
+    local board = Board(0, 0, 1)
+    assert_boolean(board.checkAvailableMatches())
+end
