@@ -30,44 +30,10 @@ end
 
 function Board:initializeTiles()
     self.tiles = self.generateTiles(self.level, self.shinyRate)
-
-    while self:calculateMatches() do
-        -- recursively initialize if matches were returned so we always have
-        -- a matchless board on start
-        self:initializeTiles()
-    end
-end
-
-function Board:calculateMatches()
-    -- store matches for later reference
-    self.matches = findMatches(self.tiles)
-
-    -- return matches table if > 0, else just return false
-    return #self.matches > 0 and self.matches or false
 end
 
 function Board:checkAvailableMatches()
     return true
-end
-
---[[
-    Remove the matches from the Board by just setting the Tile slots within
-    them to nil, then setting self.matches to nil.
-]]
-function Board:removeMatches()
-    for k, match in pairs(self.matches) do
-        for k, tile in pairs(match) do
-            -- Remove entire row if the tile is shiny
-            if tile.isShiny then
-                for col = 1, 8 do
-                    self.tiles[tile.gridY][col] = nil
-                end
-            end
-            self.tiles[tile.gridY][tile.gridX] = nil
-        end
-    end
-
-    self.matches = nil
 end
 
 --[[

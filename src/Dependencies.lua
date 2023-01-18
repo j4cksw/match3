@@ -32,7 +32,7 @@ require 'src/Util'
 -- game pieces
 require 'src/Board'
 require 'src/Tile'
-require 'src/TilesGenerator'
+require 'src/Tiles'
 -- game states
 require 'src/states/BaseState'
 require 'src/states/BeginGameState'

@@ -180,10 +180,8 @@ function PlayState:calculateMatches()
     self.highlightedTile = nil
 
     -- if we have any matches, remove them and tween the falling blocks that result
-    local matches = self.board:calculateMatches()
-    
-    if matches then
-        
+    local matches = findMatches(self.board.tiles)
+    if matches and #matches > 0 then
 
         gSounds['match']:stop()
         gSounds['match']:play()
@@ -204,8 +202,9 @@ function PlayState:calculateMatches()
         end
 
         -- remove any tiles that matched from the board, making empty spaces
-        self.board:removeMatches()
-
+        --self.board:removeMatches()
+        removeMatches(self.board.tiles, matches)
+        
         -- gets a table with tween values for tiles that should now fall
         local tilesToFall = self.board:getFallingTiles()
 
