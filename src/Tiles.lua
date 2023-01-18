@@ -160,13 +160,14 @@ end
 
 function countAvailableMatches(tiles)
     local matchesCount = 0
-    for y = 1, 1 do
-        for x = 1, 5 do
-            print(tiles[x][y].color == tiles[x+2][y].color and tiles[x][y].color == tiles[x+3][y].color)
-            if tiles[x][y].color == tiles[x+2][y].color and tiles[x][y].color == tiles[x+3][y].color then
+    for y = 1, #tiles do
+        for x = 1, #tiles[y] - 3 do
+            print(x, y)
+            if tiles[y][x].color == tiles[y][x+2].color and tiles[y][x].color == tiles[y][x+3].color then
                 matchesCount = matchesCount + 1
             end
         end
     end
+    print(matchesCount)
     return matchesCount
 end
