@@ -22,8 +22,6 @@ function randomizeTiles(level, shinyRate)
     return tiles
 end
 
-
-
 --[[
     Goes left to right, top to bottom in the board, calculating matches by counting consecutive
     tiles of the same color. Doesn't need to check the last tile in every row or column if the 
@@ -158,4 +156,17 @@ function removeMatches(tiles, matches)
     end
 
     matches = nil
+end
+
+function countAvailableMatches(tiles)
+    local matchesCount = 0
+    for y = 1, 1 do
+        for x = 1, 5 do
+            print(tiles[x][y].color == tiles[x+2][y].color and tiles[x][y].color == tiles[x+3][y].color)
+            if tiles[x][y].color == tiles[x+2][y].color and tiles[x][y].color == tiles[x+3][y].color then
+                matchesCount = matchesCount + 1
+            end
+        end
+    end
+    return matchesCount
 end
