@@ -162,8 +162,23 @@ function countAvailableMatches(tiles)
     local matchesCount = 0
     for y = 1, #tiles do
         for x = 1, #tiles[y] - 3 do
-            print(x, y)
             if tiles[y][x].color == tiles[y][x+2].color and tiles[y][x].color == tiles[y][x+3].color then
+                matchesCount = matchesCount + 1
+            end
+            if tiles[y][x].color == tiles[y][x+1].color and tiles[y][x].color == tiles[y][x+3].color then
+                matchesCount = matchesCount + 1
+            end
+        end
+        for x = 1, #tiles[y] - 2 do
+            if y + 1 <= #tiles and tiles[y][x].color == tiles[y+1][x+1].color and tiles[y][x].color == tiles[y][x+2].color then
+                matchesCount = matchesCount + 1
+            end
+            if y - 1 >= 1 and tiles[y][x].color == tiles[y-1][x+1].color and tiles[y][x].color == tiles[y][x+2].color then
+                matchesCount = matchesCount + 1
+            end
+        end
+        for x = 1, #tiles[y] do
+            if y <= #tiles - 3 and tiles[y][x].color == tiles[y+2][x].color and tiles[y][x].color == tiles[y+3][x].color then
                 matchesCount = matchesCount + 1
             end
         end
