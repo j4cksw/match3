@@ -63,6 +63,31 @@ function test_checkMatchesAvailable()
             }, 
             matches = 1
         },
+        { 
+            colors = {
+                { 1, },
+                { 1, },
+                { 2, },
+                { 1, },
+            }, 
+            matches = 1
+        },
+        { 
+            colors = {
+                { 1, 3},
+                { 2, 1},
+                { 1, 2},
+            }, 
+            matches = 1
+        },
+        { 
+            colors = {
+                { 1, 2},
+                { 2, 1},
+                { 3, 2},
+            }, 
+            matches = 1
+        },
     }
 
     for _, case in ipairs(examples) do
