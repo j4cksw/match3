@@ -29,9 +29,7 @@ function lovetest.run()
   opts.quit_on_failure = love._os == "Windows"
   lunatest.run(nil, opts)
 
-  if love._os ~= "Windows" then
-    love.event.push("quit")
-  end
+  love.event.push("quit")
 end
 
 return lovetest
