@@ -3,18 +3,17 @@ function test_checkMatchesAvailable()
         { 
             colors = {{ 1, 2, 1, 1, 3, 4, 5, 6}}, 
             matches = 1
+        },
+        { 
+            colors = {{ 2, 3, 2, 2, 1, 4, 1, 1}}, 
+            matches = 2
         }
     }
 
-    for index, case in ipairs(examples) do
+    for _, case in ipairs(examples) do
         local matches = countAvailableMatches(generateTilesFromColors(case.colors))
         assert_equal(case.matches, matches)
     end
-    -- local tiles_1 = generateTilesFromColors({{ 1, 2, 1, 1, 3, 4, 5, 6}})
-    -- assert_equal(1, countAvailableMatches(tiles_1))
-
-    local tiles_2 = generateTilesFromColors({{ 2, 3, 2, 2, 1, 4, 1, 1}})
-    assert_equal(2, countAvailableMatches(tiles_2))
 end
 
 function generateTilesFromColors(colors)
