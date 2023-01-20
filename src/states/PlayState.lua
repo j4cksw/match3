@@ -208,6 +208,11 @@ function PlayState:calculateMatches()
         -- gets a table with tween values for tiles that should now fall
         local tilesToFall = self.board:getFallingTiles()
 
+        if #tilesToFall == 0 and countAvailableMatches(self.board.tiles) == 0 then
+            self.board:resetTiles()
+            tilesToFall = self.board:getFallingTiles()
+        end
+
         -- first, tween the falling tiles over 0.25s
         Timer.tween(0.25, tilesToFall):finish(function()
             local newTiles = self.board:getNewTiles()

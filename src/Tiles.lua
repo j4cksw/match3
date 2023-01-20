@@ -14,7 +14,7 @@ function randomizeTiles(level, shinyRate)
     end
 
     local matches = findMatches(tiles)
-    if  #matches > 0 and matches then
+    if  #matches > 0 and countAvailableMatches(tiles) > 0 then
         -- recursively initialize if matches were returned so we always have
         -- a matchless board on start
         return randomizeTiles(level, shinyRate)
@@ -163,40 +163,44 @@ function countAvailableMatches(tiles)
     for y = 1, #tiles do
         for x = 1, #tiles[y] - 3 do
             if tiles[y][x].color == tiles[y][x+2].color and tiles[y][x].color == tiles[y][x+3].color then
+                print(x, y)
                 matchesCount = matchesCount + 1
             end
             if tiles[y][x].color == tiles[y][x+1].color and tiles[y][x].color == tiles[y][x+3].color then
+                print(x, y)
                 matchesCount = matchesCount + 1
             end
         end
         for x = 1, #tiles[y] - 2 do
             if y + 1 <= #tiles and tiles[y][x].color == tiles[y+1][x+1].color and tiles[y][x].color == tiles[y][x+2].color then
+                print(x, y)
                 matchesCount = matchesCount + 1
             end
             if y - 1 >= 1 and tiles[y][x].color == tiles[y-1][x+1].color and tiles[y][x].color == tiles[y][x+2].color then
+                print(x, y)
                 matchesCount = matchesCount + 1
             end
         end
-        print('start')
         for x = 1, #tiles[y] do
-            print(x, y)
-            print(x+1, y+1)
-            print(x, y+2)
-            print('---')
             if y <= #tiles - 3 and tiles[y][x].color == tiles[y+2][x].color and tiles[y][x].color == tiles[y+3][x].color then
+                print(x, y)
                 matchesCount = matchesCount + 1
             end
             if y <= #tiles - 3 and tiles[y][x].color == tiles[y+1][x].color and tiles[y][x].color == tiles[y+3][x].color then
+                print(x, y)
                 matchesCount = matchesCount + 1
             end
             if x + 1 <= #tiles[y] and y <= #tiles - 2 and tiles[y][x].color == tiles[y+1][x+1].color and tiles[y][x].color == tiles[y+2][x].color then
+                print(x, y)
                 matchesCount = matchesCount + 1
             end
             if x - 1 >= 1 and y <= #tiles - 2 and tiles[y][x].color == tiles[y+1][x-1].color and tiles[y][x].color == tiles[y+2][x].color then
+                print(x, y)
                 matchesCount = matchesCount + 1
             end
         end
     end
+    
     print(matchesCount)
     return matchesCount
 end

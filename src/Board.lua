@@ -28,8 +28,15 @@ function Board:increaseLevel()
     self.level = self.level + 1
 end
 
+function Board:varietyLevel()
+    if self.level > 6 then
+        return math.random(6)
+    end
+    return math.random(self.level)
+end
+
 function Board:initializeTiles()
-    self.tiles = self.generateTiles(self.level, self.shinyRate)
+    self.tiles = self.generateTiles(self:varietyLevel(), self.shinyRate)
 end
 
 function Board:checkAvailableMatches()
@@ -93,7 +100,7 @@ function Board:getFallingTiles()
 
             -- if the tile is nil, we need to add a new one
             if not tile then
-                local tile = Tile(x, y, math.random(18), math.random(self.level), math.random() <= self.shinyRate)
+                local tile = Tile(x, y, math.random(9), self:varietyLevel(), math.random() <= self.shinyRate)
                 tile.y = -32
                 self.tiles[y][x] = tile
 
@@ -109,6 +116,16 @@ end
 
 function Board:getNewTiles()
     return {}
+end
+
+function Board:resetTiles()
+    self.tiles = {}
+    for y = 1, 8 do
+        table.insert(self.tiles, {})
+        for x = 1, 8 do
+            table.insert(self.tiles[y], nil)
+        end
+    end
 end
 
 function Board:render()
