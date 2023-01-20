@@ -161,6 +161,7 @@ function PlayState:update(dt)
                 })
                 -- once the swap is finished, we can tween falling blocks as needed
                 :finish(function()
+                    -- TODO: cancel the swap if not match
                     self:calculateMatches()
                 end)
             end
@@ -191,7 +192,6 @@ function PlayState:calculateMatches()
             for k,v in pairs(match) do
                 self.score = self.score + v.variety * 50
             end
-            
             
             -- increase timer when earn the score
             self.timer = self.timer + 10

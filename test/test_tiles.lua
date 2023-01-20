@@ -96,6 +96,25 @@ function test_checkMatchesAvailable()
     end
 end
 
+function test_checkMatchesFromPoint()
+    local examples = {
+        {
+            colors = {{ 1, 2, 1, 1, 3, 4, 5, 6}},
+            matches = 0
+        },
+        {
+            colors = {{ 1, 1, 1, 2, 3, 4, 5, 6}},
+            matches = 1
+        },
+    }
+   
+    for _, case in ipairs(examples) do
+        local tiles = generateTilesFromColors(case.colors)
+        local matches = countMatchesFromPoint(tiles, 1, 1)
+        assert_equal(matches, case.matches)
+    end
+end
+
 function generateTilesFromColors(colors)
     local tiles = {}
     for tileY = 1, #colors do

@@ -204,3 +204,11 @@ function countAvailableMatches(tiles)
     print(matchesCount)
     return matchesCount
 end
+
+function countMatchesFromPoint(tiles, x, y)
+    local matchesCount = 0
+    if tiles[y][x].color == tiles[y][x+1].color and tiles[y][x].color == tiles[y][x+2].color then
+        matchesCount = matchesCount + 1
+    end
+    return matchesCount
+end
