@@ -189,10 +189,6 @@ function PlayState:calculateMatches()
         -- add score for each match
         for k, match in pairs(matches) do
             for k,v in pairs(match) do
-                for kk, vv in pairs(v) do
-                    print(kk)
-                    
-                end
                 self.score = self.score + v.variety * 50
             end
             
