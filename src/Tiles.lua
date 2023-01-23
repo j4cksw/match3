@@ -207,8 +207,11 @@ end
 
 function countMatchesFromPoint(tiles, x, y)
     local matchesCount = 0
-    if tiles[y][x].color == tiles[y][x+1].color and tiles[y][x].color == tiles[y][x+2].color then
+    if x < #tiles[y] - 3 and tiles[y][x].color == tiles[y][x+1].color and tiles[y][x].color == tiles[y][x+2].color then
         matchesCount = matchesCount + 1
+    end
+    if x > 3 and tiles[y][x].color == tiles[y][x-1].color and tiles[y][x].color == tiles[y][x-2].color then
+        matchesCount = matchesCount +1
     end
     return matchesCount
 end

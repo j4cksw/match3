@@ -100,18 +100,33 @@ function test_checkMatchesFromPoint()
     local examples = {
         {
             colors = {{ 1, 2, 1, 1, 3, 4, 5, 6}},
+            point = { x= 1, y= 1},
             matches = 0
         },
         {
             colors = {{ 1, 1, 1, 2, 3, 4, 5, 6}},
+            point = { x= 1, y= 1},
+            matches = 1
+        },
+        {
+            colors = {{ 2, 1, 1, 1, 3, 4, 5, 6}},
+            point = { x= 2, y= 1},
+            matches = 1
+        },
+        {
+            colors = {{ 2, 2, 1, 1, 3, 1, 1, 1}},
+            point = { x= 8, y= 1},
             matches = 1
         },
     }
    
     for _, case in ipairs(examples) do
         local tiles = generateTilesFromColors(case.colors)
-        local matches = countMatchesFromPoint(tiles, 1, 1)
-        assert_equal(matches, case.matches)
+        local matches = countMatchesFromPoint(tiles, case.point.x, case.point.y)
+        assert_equal(matches, 
+        case.matches, 
+        0, 
+        string.format("Expected %d but got %d at %d, %d", case.matches, matches, case.point.x, case.point.y))
     end
 end
 

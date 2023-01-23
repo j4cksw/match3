@@ -159,6 +159,7 @@ function PlayState:update(dt)
                     [self.highlightedTile] = {x = newTile.x, y = newTile.y},
                     [newTile] = {x = self.highlightedTile.x, y = self.highlightedTile.y}
                 })
+                
                 -- once the swap is finished, we can tween falling blocks as needed
                 :finish(function()
                     -- TODO: cancel the swap if not match
