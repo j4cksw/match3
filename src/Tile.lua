@@ -46,14 +46,15 @@ function Tile:render(x, y)
         self.x + x + 2, self.y + y + 2)
 
     -- draw tile itself
+    love.graphics.setColor(255/255, 255/255, 255/255, 1)
     if self.isShiny then
-        love.graphics.setColor(255/255, 255/255, 255/255, 1)
+        
         effect(function ()
             love.graphics.draw(gTextures['main'], gFrames['tiles'][self.color][self.variety],
             self.x + x, self.y + y)
         end)
     else
-        love.graphics.setColor(180/255, 180/255, 180/255, 1)
+        --love.graphics.setColor(180/255, 180/255, 180/255, 1)
         love.graphics.draw(gTextures['main'], gFrames['tiles'][self.color][self.variety],
             self.x + x, self.y + y)
     end
