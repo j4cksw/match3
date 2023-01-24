@@ -207,11 +207,25 @@ end
 
 function countMatchesFromPoint(tiles, x, y)
     local matchesCount = 0
-    if x < #tiles[y] - 3 and tiles[y][x].color == tiles[y][x+1].color and tiles[y][x].color == tiles[y][x+2].color then
+    -- horizontal
+    if x <= #tiles[y] - 2 and tiles[y][x].color == tiles[y][x+1].color and tiles[y][x].color == tiles[y][x+2].color then
         matchesCount = matchesCount + 1
     end
-    if x > 3 and tiles[y][x].color == tiles[y][x-1].color and tiles[y][x].color == tiles[y][x-2].color then
-        matchesCount = matchesCount +1
+    if x >= 3 and tiles[y][x].color == tiles[y][x-1].color and tiles[y][x].color == tiles[y][x-2].color then
+        matchesCount = matchesCount + 1
+    end
+    if x > 1 and x < #tiles[y] -1 and tiles[y][x].color == tiles[y][x-1].color and tiles[y][x].color == tiles[y][x+1].color then
+        matchesCount = matchesCount + 1
+    end
+    -- vertical
+    if #tiles >= 3 and y < #tiles -2 and tiles[y][x].color == tiles[y+1][x].color and tiles[y][x].color == tiles[y+2][x].color then
+        matchesCount = matchesCount + 1
+    end
+    if #tiles >= 3 and y >= 3 and tiles[y][x].color == tiles[y-1][x].color and tiles[y][x].color == tiles[y-2][x].color then
+        matchesCount = matchesCount + 1
+    end
+    if y > 1 and y <= #tiles - 1 and tiles[y][x].color == tiles[y-1][x].color and tiles[y][x].color == tiles[y+1][x].color then
+        matchesCount = matchesCount + 1
     end
     return matchesCount
 end

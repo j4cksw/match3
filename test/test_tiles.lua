@@ -98,6 +98,7 @@ end
 
 function test_checkMatchesFromPoint()
     local examples = {
+        -- horizontal left to right
         {
             colors = {{ 1, 2, 1, 1, 3, 4, 5, 6}},
             point = { x= 1, y= 1},
@@ -114,8 +115,128 @@ function test_checkMatchesFromPoint()
             matches = 1
         },
         {
+            colors = {{ 2, 2, 2, 2, 1, 1, 1, 5}},
+            point = { x= 5, y= 1},
+            matches = 1
+        },
+        {
+            colors = {{ 2, 2, 2, 2, 2, 1, 1, 1}},
+            point = { x= 6, y= 1},
+            matches = 1
+        },
+        -- horizontal right to left
+        {
             colors = {{ 2, 2, 1, 1, 3, 1, 1, 1}},
             point = { x= 8, y= 1},
+            matches = 1
+        },
+        {
+            colors = {{ 1, 1, 1, 2, 3, 4, 5, 6}},
+            point = { x= 3, y= 1},
+            matches = 1
+        },
+        -- centered horizontal
+        {
+            colors = {{ 1, 1, 1, 2, 3, 4, 5, 6}},
+            point = { x= 2, y= 1},
+            matches = 1
+        },
+        -- combined horizontal
+        {
+            colors = {{ 2, 2, 1, 1, 1, 1, 1, 1}},
+            point = { x= 5, y= 1},
+            matches = 3
+        },
+        {
+            colors = {{ 2, 2, 1, 1, 1, 1, 2, 2}},
+            point = { x= 5, y= 1},
+            matches = 2
+        },
+        -- vertical top to bottom
+        { 
+            colors = {
+                { 1, },
+                { 1, },
+                { 1, },
+                { 2, },
+                { 3, },
+                { 4, },
+                { 5, },
+                { 6, },
+            }, 
+            point = { x= 1, y= 1},
+            matches = 1
+        },
+        { 
+            colors = {
+                { 2, },
+                { 2, },
+                { 2, },
+                { 2, },
+                { 2, },
+                { 2, },
+                { 1, },
+                { 1, },
+            }, 
+            point = { x= 1, y= 8},
+            matches = 0
+        },
+        -- vertical bottom to top
+        { 
+            colors = {
+                { 2, },
+                { 2, },
+                { 2, },
+                { 2, },
+                { 2, },
+                { 1, },
+                { 1, },
+                { 1, },
+            }, 
+            point = { x= 1, y= 8},
+            matches = 1
+        },
+        { 
+            colors = {
+                { 1, },
+                { 1, },
+                { 1, },
+                { 2, },
+                { 3, },
+                { 4, },
+                { 2, },
+                { 2, },
+            }, 
+            point = { x= 1, y= 3},
+            matches = 1
+        },
+        -- centered vertical
+        { 
+            colors = {
+                { 1, },
+                { 1, },
+                { 1, },
+                { 2, },
+                { 3, },
+                { 4, },
+                { 2, },
+                { 2, },
+            }, 
+            point = { x= 1, y= 2},
+            matches = 1
+        },
+        { 
+            colors = {
+                { 2, },
+                { 2, },
+                { 2, },
+                { 2, },
+                { 3, },
+                { 1, },
+                { 1, },
+                { 1, },
+            }, 
+            point = { x= 1, y= 7},
             matches = 1
         },
     }

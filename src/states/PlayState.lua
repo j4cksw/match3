@@ -122,7 +122,7 @@ function PlayState:update(dt)
             -- if same tile as currently highlighted, deselect
             local x = self.boardHighlightX + 1
             local y = self.boardHighlightY + 1
-            
+            print('current x,y', x, y)
             -- if nothing is highlighted, highlight current tile
             if not self.highlightedTile then
                 self.highlightedTile = self.board.tiles[y][x]
@@ -163,7 +163,17 @@ function PlayState:update(dt)
                 -- once the swap is finished, we can tween falling blocks as needed
                 :finish(function()
                     -- TODO: cancel the swap if not match
-                    self:calculateMatches()
+                    print('count match', countMatchesFromPoint(self.board.tiles, x, y))
+                    if countMatchesFromPoint(self.board.tiles, x, y) == 0 then
+                        print('error!')
+                        -- Timer.tween(0.1, {
+                        --     [self.highlightedTile] = {x = self.highlightedTile.x, y = self.highlightedTile.y},
+                        --     [newTile] = {x = newTile.x, y = newTile.y}
+                        -- })
+                    else
+                        self:calculateMatches()
+                    end
+                    
                 end)
             end
         end
