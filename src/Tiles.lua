@@ -205,26 +205,26 @@ function countAvailableMatches(tiles)
     return matchesCount
 end
 
-function countMatchesFromPoint(tiles, x, y)
+function countMatchesFromPoint(tiles, point)
     local matchesCount = 0
     -- horizontal
-    if x <= #tiles[y] - 2 and tiles[y][x].color == tiles[y][x+1].color and tiles[y][x].color == tiles[y][x+2].color then
+    if point.x <= #tiles[point.y] - 2 and tiles[point.y][point.x].color == tiles[point.y][point.x+1].color and tiles[point.y][point.x].color == tiles[point.y][point.x+2].color then
         matchesCount = matchesCount + 1
     end
-    if x >= 3 and tiles[y][x].color == tiles[y][x-1].color and tiles[y][x].color == tiles[y][x-2].color then
+    if point.x >= 3 and tiles[point.y][point.x].color == tiles[point.y][point.x-1].color and tiles[point.y][point.x].color == tiles[point.y][point.x-2].color then
         matchesCount = matchesCount + 1
     end
-    if x > 1 and x < #tiles[y] -1 and tiles[y][x].color == tiles[y][x-1].color and tiles[y][x].color == tiles[y][x+1].color then
+    if point.x > 1 and point.x <= #tiles[point.y] -1 and tiles[point.y][point.x].color == tiles[point.y][point.x-1].color and tiles[point.y][point.x].color == tiles[point.y][point.x+1].color then
         matchesCount = matchesCount + 1
     end
     -- vertical
-    if #tiles >= 3 and y < #tiles -2 and tiles[y][x].color == tiles[y+1][x].color and tiles[y][x].color == tiles[y+2][x].color then
+    if #tiles >= 3 and point.y <= #tiles -2 and tiles[point.y][point.x].color == tiles[point.y+1][point.x].color and tiles[point.y][point.x].color == tiles[point.y+2][point.x].color then
         matchesCount = matchesCount + 1
     end
-    if #tiles >= 3 and y >= 3 and tiles[y][x].color == tiles[y-1][x].color and tiles[y][x].color == tiles[y-2][x].color then
+    if #tiles >= 3 and point.y >= 3 and tiles[point.y][point.x].color == tiles[point.y-1][point.x].color and tiles[point.y][point.x].color == tiles[point.y-2][point.x].color then
         matchesCount = matchesCount + 1
     end
-    if y > 1 and y <= #tiles - 1 and tiles[y][x].color == tiles[y-1][x].color and tiles[y][x].color == tiles[y+1][x].color then
+    if point.y > 1 and point.y <= #tiles - 1 and tiles[point.y][point.x].color == tiles[point.y-1][point.x].color and tiles[point.y][point.x].color == tiles[point.y+1][point.x].color then
         matchesCount = matchesCount + 1
     end
     return matchesCount

@@ -145,7 +145,7 @@ function PlayState:update(dt)
                     targetPosition,
                     destinationPosition,
                     function()
-                        if countMatchesFromPoint(self.board.tiles, x, y) == 0 then
+                        if countMatchesFromPoint(self.board.tiles, targetPosition) == 0 and countMatchesFromPoint(self.board.tiles, destinationPosition) == 0 then
                             Timer.after(0.1, function ()
                                 self.board.tiles = swap(self.board.tiles,
                                     destinationPosition,

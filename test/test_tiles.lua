@@ -243,7 +243,7 @@ function test_checkMatchesFromPoint()
    
     for _, case in ipairs(examples) do
         local tiles = generateTilesFromColors(case.colors)
-        local matches = countMatchesFromPoint(tiles, case.point.x, case.point.y)
+        local matches = countMatchesFromPoint(tiles, case.point)
         assert_equal(matches, 
         case.matches, 
         0, 
