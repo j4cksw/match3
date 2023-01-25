@@ -243,7 +243,7 @@ function swap(tiles, target, destination, onFinished)
     tiles[targetTile.gridY][targetTile.gridX] = targetTile
     tiles[destTile.gridY][destTile.gridX] = destTile
 
-    Timer.tween(0.2, {
+    Timer.tween(0.1, {
         [targetTile] = {x = destTile.x, y = destTile.y},
         [destTile] = {x = targetTile.x, y = targetTile.y}
     }):finish(onFinished)

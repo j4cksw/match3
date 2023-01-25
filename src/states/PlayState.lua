@@ -139,17 +139,20 @@ function PlayState:update(dt)
             else
                 local targetPosition = {x=self.highlightedTile.gridX, y=self.highlightedTile.gridY}
                 local destinationPosition = {x=x, y=y}
+
                 self.board.tiles = swap(
                     self.board.tiles, 
                     targetPosition,
                     destinationPosition,
                     function()
                         if countMatchesFromPoint(self.board.tiles, x, y) == 0 then
-                            self.board.tiles = swap(self.board.tiles,
-                                destinationPosition,
-                                targetPosition
-                            )
-                            self.highlightedTile = nil
+                            Timer.after(0.1, function ()
+                                self.board.tiles = swap(self.board.tiles,
+                                    destinationPosition,
+                                    targetPosition
+                                )
+                                self.highlightedTile = nil
+                            end)
                             gSounds['error']:play()
                         else
                             self:calculateMatches()
