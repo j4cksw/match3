@@ -21,6 +21,8 @@ push = require 'lib/push'
 -- used for timers and tweening
 Timer = require 'lib/knife.timer'
 
+pprint = require 'lib/pprint'
+json = require 'lib/json'
 --
 -- our own code
 --

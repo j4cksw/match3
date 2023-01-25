@@ -137,44 +137,24 @@ function PlayState:update(dt)
                 gSounds['error']:play()
                 self.highlightedTile = nil
             else
-                -- swap grid positions of tiles
-                local tempX = self.highlightedTile.gridX
-                local tempY = self.highlightedTile.gridY
-
-                local newTile = self.board.tiles[y][x]
-
-                self.highlightedTile.gridX = newTile.gridX
-                self.highlightedTile.gridY = newTile.gridY
-                newTile.gridX = tempX
-                newTile.gridY = tempY
-
-                -- swap tiles in the tiles table
-                self.board.tiles[self.highlightedTile.gridY][self.highlightedTile.gridX] =
-                    self.highlightedTile
-
-                self.board.tiles[newTile.gridY][newTile.gridX] = newTile
-
-                -- tween coordinates between the two so they swap
-                Timer.tween(0.1, {
-                    [self.highlightedTile] = {x = newTile.x, y = newTile.y},
-                    [newTile] = {x = self.highlightedTile.x, y = self.highlightedTile.y}
-                })
-                
-                -- once the swap is finished, we can tween falling blocks as needed
-                :finish(function()
-                    -- TODO: cancel the swap if not match
-                    print('count match', countMatchesFromPoint(self.board.tiles, x, y))
-                    if countMatchesFromPoint(self.board.tiles, x, y) == 0 then
-                        print('error!')
-                        -- Timer.tween(0.1, {
-                        --     [self.highlightedTile] = {x = self.highlightedTile.x, y = self.highlightedTile.y},
-                        --     [newTile] = {x = newTile.x, y = newTile.y}
-                        -- })
-                    else
-                        self:calculateMatches()
-                    end
-                    
-                end)
+                local targetPosition = {x=self.highlightedTile.gridX, y=self.highlightedTile.gridY}
+                local destinationPosition = {x=x, y=y}
+                self.board.tiles = swap(
+                    self.board.tiles, 
+                    targetPosition,
+                    destinationPosition,
+                    function()
+                        if countMatchesFromPoint(self.board.tiles, x, y) == 0 then
+                            self.board.tiles = swap(self.board.tiles,
+                                destinationPosition,
+                                targetPosition
+                            )
+                            self.highlightedTile = nil
+                            gSounds['error']:play()
+                        else
+                            self:calculateMatches()
+                        end 
+                    end)
             end
         end
     end

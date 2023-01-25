@@ -229,3 +229,24 @@ function countMatchesFromPoint(tiles, x, y)
     end
     return matchesCount
 end
+
+function swap(tiles, target, destination, onFinished)
+    local targetTile = tiles[target.y][target.x]
+    local destTile = tiles[destination.y][destination.x]
+
+    targetTile.gridX = destTile.gridX
+    targetTile.gridY = destTile.gridY
+
+    destTile.gridX = target.x
+    destTile.gridY = target.y
+    
+    tiles[targetTile.gridY][targetTile.gridX] = targetTile
+    tiles[destTile.gridY][destTile.gridX] = destTile
+
+    Timer.tween(0.2, {
+        [targetTile] = {x = destTile.x, y = destTile.y},
+        [destTile] = {x = targetTile.x, y = targetTile.y}
+    }):finish(onFinished)
+
+    return tiles
+end
