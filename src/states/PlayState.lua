@@ -117,11 +117,8 @@ function PlayState:update(dt)
             gSounds['select']:play()
         end
 
-        if love.mouse.isDown(1) then
-            local mouseTile = self.board:findByMousePosition(push:toGame(love.mouse.getPosition()))
-
-            print("mouse", push:toGame(love.mouse.getPosition()))
-            print("tile", pprint(mouseTile))
+        if love.mouse.mousePressed ~= nil then
+            local mouseTile = self.board:findByMousePosition(push:toGame(love.mouse.mousePressed.x, love.mouse.mousePressed.y))
 
             if mouseTile then
                 self.boardHighlightX = mouseTile.gridX-1
@@ -130,7 +127,9 @@ function PlayState:update(dt)
         end
 
         -- if we've pressed enter, to select or deselect a tile...
-        if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') or love.mouse.isDown(1) then
+        if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') or love.mouse.mousePressed ~= nil then
+            
+            love.mouse.mousePressed = nil
             -- if same tile as currently highlighted, deselect
             print('hilighted', self.boardHighlightX, self.boardHighlightY)
             local x = self.boardHighlightX + 1

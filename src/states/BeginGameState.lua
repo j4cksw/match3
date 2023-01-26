@@ -85,3 +85,5 @@ function BeginGameState:render()
     love.graphics.setColor(255/255, 255/255, 255/255, self.transitionAlpha)
     love.graphics.rectangle('fill', 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT)
 end
+
+function BeginGameState:mousepressed(x, y) end

@@ -119,6 +119,10 @@ function love.update(dt)
     love.keyboard.keysPressed = {}
 end
 
+function love.mousepressed(x, y)
+    love.mouse.mousePressed = {x=x, y=y}
+end
+
 function love.draw()
     push:start()
 

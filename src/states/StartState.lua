@@ -197,3 +197,5 @@ function StartState:drawTextShadow(text, y)
     love.graphics.printf(text, 0, y + 1, VIRTUAL_WIDTH, 'center')
     love.graphics.printf(text, 1, y + 2, VIRTUAL_WIDTH, 'center')
 end
+
+function StartState:mousepressed(x, y) end
