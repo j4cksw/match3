@@ -118,16 +118,25 @@ function PlayState:update(dt)
         end
 
         if love.mouse.isDown(1) then
+            local mouseTile = self.board:findByMousePosition(push:toGame(love.mouse.getPosition()))
+
             print("mouse", push:toGame(love.mouse.getPosition()))
-            print("tile", pprint(self.board:findByMousePosition(push:toGame(love.mouse.getPosition()))))
+            print("tile", pprint(mouseTile))
+
+            if mouseTile then
+                self.boardHighlightX = mouseTile.gridX-1
+                self.boardHighlightY = mouseTile.gridY-1
+            end
         end
 
         -- if we've pressed enter, to select or deselect a tile...
-        if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') or love.mouse.isDown(1) then
             -- if same tile as currently highlighted, deselect
+            print('hilighted', self.boardHighlightX, self.boardHighlightY)
             local x = self.boardHighlightX + 1
             local y = self.boardHighlightY + 1
             print('current x,y', x, y)
+
             -- if nothing is highlighted, highlight current tile
             if not self.highlightedTile then
                 self.highlightedTile = self.board.tiles[y][x]
