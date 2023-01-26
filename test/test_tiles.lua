@@ -251,6 +251,14 @@ function test_checkMatchesFromPoint()
     end
 end
 
+function test_find_tile_by_position()
+    local tiles = generateTilesFromColors({
+        {1, 1}, 
+        {1, 1}})
+    local tile = findByPosition(tiles, {x=1, y=1}, {x=0, y=0})
+    assert_not_nil(tile)
+end
+
 function generateTilesFromColors(colors)
     local tiles = {}
     for tileY = 1, #colors do

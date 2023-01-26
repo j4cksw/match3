@@ -135,3 +135,7 @@ function Board:render()
         end
     end
 end
+
+function Board:findByMousePosition(mouseX, mouseY)
+    return findByPosition(self.tiles, {x=mouseX, y=mouseY}, { x=self.x, y=self.y })
+end

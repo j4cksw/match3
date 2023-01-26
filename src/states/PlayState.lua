@@ -117,6 +117,11 @@ function PlayState:update(dt)
             gSounds['select']:play()
         end
 
+        if love.mouse.isDown(1) then
+            print("mouse", push:toGame(love.mouse.getPosition()))
+            print("tile", pprint(self.board:findByMousePosition(push:toGame(love.mouse.getPosition()))))
+        end
+
         -- if we've pressed enter, to select or deselect a tile...
         if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
             -- if same tile as currently highlighted, deselect

@@ -250,3 +250,15 @@ function swap(tiles, target, destination, onFinished)
 
     return tiles
 end
+
+function findByPosition(tiles, position, offset)
+    for row = 1, #tiles do
+        for col = 1, #tiles[row] do
+           if position.x > offset.x + tiles[row][col].x and position.x < offset.x + tiles[row][col].x + 32 then
+                if position.y > offset.y + tiles[row][col].y and position.y < offset.y + tiles[row][col].y + 32 then
+                    return tiles[row][col]
+                end
+            end
+        end
+    end
+end
